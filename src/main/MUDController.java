@@ -16,7 +16,7 @@ public class MUDController {
 
     public void runGameLoop() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to the MUD game! Type 'help' for a list of commands.");
+        System.out.println("Добро пожаловать в MUD игру! Введите 'help' для списка команд.");
 
         while (running) {
             System.out.print("> ");
@@ -24,7 +24,7 @@ public class MUDController {
             handleInput(input);
         }
 
-        System.out.println("Exiting game...");
+        System.out.println("Выход из игры...");
         scanner.close();
     }
 
@@ -54,7 +54,7 @@ public class MUDController {
                 running = false;
                 break;
             default:
-                System.out.println("Unknown command.");
+                System.out.println("Неизвестная команда.");
                 break;
         }
     }
@@ -68,10 +68,10 @@ public class MUDController {
         Room nextRoom = player.getCurrentRoom().getExit(direction);
         if (nextRoom != null) {
             player.setCurrentRoom(nextRoom);
-            System.out.println("You moved " + direction + ".");
+            System.out.println("Вы переместились " + direction + ".");
             lookAround();
         } else {
-            System.out.println("You can't go that way!");
+            System.out.println("Вы не можете идти в этом направлении!");
         }
     }
 
@@ -81,28 +81,28 @@ public class MUDController {
         if (item != null) {
             player.addItem(item);
             currentRoom.removeItem(item);
-            System.out.println("You picked up " + itemName + ".");
+            System.out.println("Вы подняли " + itemName + ".");
         } else {
-            System.out.println("No item named " + itemName + " here!");
+            System.out.println("Здесь нет предмета с названием " + itemName + "!");
         }
     }
 
     private void checkInventory() {
         if (player.getInventory().isEmpty()) {
-            System.out.println("Your inventory is empty.");
+            System.out.println("Ваш инвентарь пуст.");
         } else {
-            System.out.println("You are carrying:");
+            System.out.println("Вы несете:");
             player.getInventory().forEach(item -> System.out.println("- " + item.getName()));
         }
     }
 
     private void showHelp() {
-        System.out.println("Available commands:");
-        System.out.println("look - Describe the current room");
-        System.out.println("move <direction> - Move in a specified direction");
-        System.out.println("pick up <itemName> - Pick up an item from the ground");
-        System.out.println("inventory - List the items you are carrying");
-        System.out.println("help - Show this help menu");
-        System.out.println("quit/exit - End the game");
+        System.out.println("Доступные команды:");
+        System.out.println("look - Осмотреть текущую комнату");
+        System.out.println("move <направление> - Переместиться в указанном направлении");
+        System.out.println("pick up <название предмета> - Поднять предмет с земли");
+        System.out.println("inventory - Показать предметы в инвентаре");
+        System.out.println("help - Показать это меню помощи");
+        System.out.println("quit/exit - Выйти из игры");
     }
 }
